@@ -18,7 +18,7 @@ Window {
     TextEdit {
         id: editor
         anchors.fill: parent
-        font.family: "Helvetica"
+        font.family: "思源黑體"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
 
@@ -37,13 +37,6 @@ Window {
         onTextChanged: timer.start()
         Keys.onPressed: timer.start()
         Keys.onReleased: timer.start()
-
-        Behavior on font.pixelSize {
-            SmoothedAnimation {
-                duration: 50
-                easing.type: Easing.OutExpo
-            }
-        }
     }
 
     Text {
@@ -64,18 +57,16 @@ Window {
         triggeredOnStart: false
 
         onTriggered: {
-            var baseSize = 16;
+            var baseSize = Math.min(window.width, window.height);
             var ratio = 1.125;
 
             do {
                 measurer.font.pixelSize = baseSize;
-                if (measurer.paintedWidth <= editor.width &&
-                    measurer.paintedHeight <= editor.height)
-                    baseSize = Math.floor(baseSize * ratio);
-                else break;
-            } while (baseSize < window.height)
+                baseSize = Math.floor(baseSize / ratio);
+            } while (measurer.paintedWidth >= editor.width ||
+                     measurer.paintedHeight >= editor.height)
 
-            editor.font.pixelSize = measurer.font.pixelSize;
+            editor.font.pixelSize = baseSize;
         }
     }
 }
