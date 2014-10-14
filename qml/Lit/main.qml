@@ -8,8 +8,15 @@ Rectangle {
         font.family: "思源黑體"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
+
+        color: "#222"
+        selectionColor: "#4fc3f7"
+        selectedTextColor: "#333"
+
         horizontalAlignment: TextEdit.AlignHCenter
         verticalAlignment: TextEdit.AlignVCenter
+        textMargin: 0
+
         smooth: true
         focus: true
 
