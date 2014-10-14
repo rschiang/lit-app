@@ -1,6 +1,16 @@
 import QtQuick 2.0
+import QtQuick.Window 2.0
 
-Rectangle {
+Window {
+    id: window
+    title: "Lit"
+    x: 0
+    y: 0
+    width: Screen.desktopAvailableWidth
+    height: Screen.desktopAvailableHeight
+
+    visible: true
+    flags: Qt.Window | Qt.WindowFullscreenButtonHint
 
     TextEdit {
         id: editor
@@ -13,8 +23,8 @@ Rectangle {
         selectionColor: "#4fc3f7"
         selectedTextColor: "#333"
 
-        horizontalAlignment: TextEdit.AlignHCenter
-        verticalAlignment: TextEdit.AlignVCenter
+        //horizontalAlignment: TextEdit.AlignHCenter
+        //verticalAlignment: TextEdit.AlignVCenter
         textMargin: 0
 
         smooth: true
@@ -23,12 +33,16 @@ Rectangle {
         onTextChanged: {
             var baseSize = 16;
             var ratio = 1.125;
+            editor.font.pixelSize = 128; return;
 
             do {
                 measurer.font.pixelSize = baseSize;
-                baseSize = Math.floor(baseSize * ratio);
-            } while (measurer.paintedWidth <= parent.width &&
-                     measurer.paintedHeight <= parent.height)
+                if (measurer.paintedWidth <= window.width &&
+                    measurer.paintedHeight <= window.height)
+                    baseSize = Math.floor(baseSize * ratio);
+                else break;
+            } while (baseSize < window.height)
+
             editor.font.pixelSize = measurer.font.pixelSize;
         }
     }

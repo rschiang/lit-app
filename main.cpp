@@ -1,17 +1,15 @@
 #include <QtGui/QGuiApplication>
-#include "qtquick2applicationviewer.h"
+#include <QQmlApplicationEngine>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    app.setApplicationName("Lit");
+    app.setOrganizationName("litapp");
+    app.setOrganizationDomain("litapp.com");
 
-    QtQuick2ApplicationViewer viewer;
-    viewer.setMainQmlFile(QStringLiteral("qml/Lit/main.qml"));
-    viewer.setTitle("Lit");
-    viewer.setFlags(viewer.flags() | Qt::WindowFullscreenButtonHint);
-    viewer.setBaseSize(QSize(1024, 768));
-    viewer.showExpanded();
-    viewer.setWindowState(Qt::WindowMaximized);
+    QQmlApplicationEngine engine;
+    engine.load(QUrl("qrc:/qml/main.qml"));
 
     return app.exec();
 }
