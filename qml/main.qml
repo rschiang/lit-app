@@ -37,16 +37,23 @@ Window {
         onTextChanged: timer.start()
         Keys.onPressed: timer.start()
         Keys.onReleased: timer.start()
+
+        Behavior on font.pixelSize {
+            SmoothedAnimation {
+                duration: 50
+                easing.type: Easing.InExpo
+            }
+        }
     }
 
     Text {
         id: measurer
-        opacity: 0.2
+        opacity: 0
         font.family: editor.font.family
         font.weight: editor.font.weight
         width: editor.width
         wrapMode: editor.wrapMode
-        text: editor.length > 0 ? editor.text : "A"
+        text: editor.length > 0 ? editor.text : "Hello world."
     }
 
     Timer {
