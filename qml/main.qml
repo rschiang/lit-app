@@ -53,8 +53,11 @@ Window {
     Text {
         id: measurer
         opacity: 0
+
         font.family: editor.font.family
         font.weight: editor.font.weight
+        renderType: Text.NativeRendering
+
         width: editor.width
         wrapMode: editor.wrapMode
         text: editor.length > 0 ? editor.text : "Hello world."
