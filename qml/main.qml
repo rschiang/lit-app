@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
+import QtQuick.Controls 1.1
 
 Window {
     id: window
@@ -15,6 +16,9 @@ Window {
     onWidthChanged: timer.start()
     onHeightChanged: timer.start()
 
+    property bool lightsOut: false
+    color: lightsOut ? "#282828" : "#fff"
+
     TextEdit {
         id: editor
         anchors.fill: parent
@@ -22,9 +26,9 @@ Window {
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
 
-        color: "#222"
-        selectionColor: "#4fc3f7"
-        selectedTextColor: "#333"
+        color: lightsOut ? "#f8f8f2" : "#222"
+        selectionColor: lightsOut ? "#49483e" : "#4fc3f7"
+        selectedTextColor: lightsOut ? "#f8f8f2" : "#333"
 
         horizontalAlignment: TextEdit.AlignHCenter
         verticalAlignment: TextEdit.AlignVCenter
@@ -74,6 +78,14 @@ Window {
                      measurer.paintedHeight >= editor.height)
 
             editor.font.pixelSize = baseSize;
+        }
+    }
+
+    Action {
+        text:"Lights Out Mode"
+        shortcut: "Ctrl+L"
+        onTriggered: {
+            lightsOut = !lightsOut
         }
     }
 }
