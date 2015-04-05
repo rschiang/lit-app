@@ -1,5 +1,7 @@
 #include <QtGui/QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <LitNativeHandler.h>
 
 int main(int argc, char *argv[])
 {
@@ -8,7 +10,10 @@ int main(int argc, char *argv[])
     app.setOrganizationName("litapp");
     app.setOrganizationDomain("litapp.com");
 
+    LitNativeHandler native(&app);
+
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("Native", &native);
     engine.load(QUrl("qrc:/qml/main.qml"));
 
     return app.exec();

@@ -3,7 +3,14 @@ TARGET = Lit
 QT += qml quick
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    LitNativeHandler.cpp
+
+HEADERS += \
+    LitNativeHandler.h
+
+RESOURCES += \
+    main.qrc
 
 OTHER_FILES += qml/*.qml
 
@@ -12,10 +19,7 @@ mac {
     ICON = platform/mac/icon.icns
     QMAKE_MAC_SDK = macosx10.9
 
-    CONFIG(release) {
+    CONFIG(build_release) {
         QMAKE_POST_LINK += macdeployqt Lit.app -qmldir=qml/ -verbose=1 -dmg;
     }
 }
-
-RESOURCES += \
-    main.qrc
