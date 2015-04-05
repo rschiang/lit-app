@@ -1,7 +1,7 @@
 #include <QtGui/QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <LitNativeHandler.h>
+#include "LitNativeHandler.h"
 
 int main(int argc, char *argv[])
 {
