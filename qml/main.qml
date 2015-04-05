@@ -58,6 +58,7 @@ Window {
         font.weight: editor.font.weight
         renderType: Text.NativeRendering
 
+        textFormat: Text.PlainText
         width: editor.width
         wrapMode: editor.wrapMode
         text: editor.length > 0 ? editor.text : "Hello world."
