@@ -6,14 +6,13 @@ Window {
     id: window
     title: "Lit"
 
-    width: 400
-    height: 300
-
     onWidthChanged: timer.start()
     onHeightChanged: timer.start()
 
     function open() {
         window.flags |= Qt.WindowStaysOnTopHint
+        window.width = 400
+        window.height = 300
         window.show()
     }
 
@@ -25,7 +24,7 @@ Window {
     TextEdit {
         id: editor
         anchors.fill: parent
-        font.family: "Noto Sans CJK"
+        font.family: "Noto Sans T Chinese"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
 

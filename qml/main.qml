@@ -9,10 +9,15 @@ QtObject {
     property string mode
 
     // Functions
-    function spawn(screen) {
-        var window = windowPrototype.createObject(app)
+    function spawn(screen, proto) {
+        if (!proto)
+            proto = windowPrototype
+
+        var window = proto.createObject(app)
         Native.setScreen(window, screen)
         window.open()
+
+        return window
     }
 
     // Events
@@ -23,9 +28,7 @@ QtObject {
         for (var i = 0; i < screens.length; i++)
             spawn(screens[i])
 
-        var editor = editorPrototype.createObject(app)
-        Native.setScreen(editor, primaryScreen)
-        editor.open()
+        spawn(primaryScreen, editorPrototype)
     }
 
     // Resources
