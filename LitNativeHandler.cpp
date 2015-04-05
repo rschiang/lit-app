@@ -6,12 +6,13 @@ LitNativeHandler::LitNativeHandler(QGuiApplication* parent)
     this->app = parent;
 }
 
-void LitNativeHandler::enumerateScreen(QJSValue callback) {
+QVariantList LitNativeHandler::getScreens() {
+    QVariantList screens;
     foreach (QScreen* screen, QGuiApplication::screens()) {
-        QJSValue wrapper = callback.engine()->newQObject(screen);
+        screens << QVariant::fromValue(screen);
         QQmlEngine::setObjectOwnership(screen, QQmlEngine::CppOwnership);
-        callback.call(QJSValueList() << wrapper);
     }
+    return screens;
 }
 
 QScreen* LitNativeHandler::getPrimaryScreen() {
