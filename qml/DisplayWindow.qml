@@ -4,16 +4,18 @@ import QtQuick.Window 2.1
 Window {
     id: window
     title: "Lit"
-    visibility: Window.Hidden
-
-    function open() {
-        window.flags |= Qt.WindowDoesNotAcceptFocus
-        window.show()
-    }
+    visible: true
 
     Text {
         anchors.fill: parent
+        horizontalAlignment: TextEdit.AlignHCenter
+        verticalAlignment: TextEdit.AlignVCenter
+
         font.pixelSize: 72
-        text: "Hello world"
+        text: app.text
+    }
+
+    Component.onCompleted: {
+        window.flags |= Qt.WindowDoesNotAcceptFocus
     }
 }

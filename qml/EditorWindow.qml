@@ -9,7 +9,7 @@ Window {
     onWidthChanged: timer.start()
     onHeightChanged: timer.start()
 
-    function open() {
+    function init() {
         window.flags |= Qt.WindowStaysOnTopHint
         window.width = 400
         window.height = 300
@@ -40,7 +40,10 @@ Window {
         focus: true
         selectByMouse: true
 
-        onTextChanged: timer.start()
+        onTextChanged: {
+            app.text = text
+            timer.start()
+        }
         Keys.onPressed: timer.start()
         Keys.onReleased: timer.start()
 

@@ -15,7 +15,6 @@ QtObject {
 
         var window = proto.createObject(app)
         Native.setScreen(window, screen)
-        window.open()
 
         return window
     }
@@ -26,9 +25,11 @@ QtObject {
         var primaryScreen = Native.getPrimaryScreen()
 
         for (var i = 0; i < screens.length; i++)
-            spawn(screens[i])
+            if (screens[i] != primaryScreen)
+                spawn(screens[i])
 
-        spawn(primaryScreen, editorPrototype)
+        var editor = spawn(primaryScreen, editorPrototype)
+        editor.init()
     }
 
     // Resources
