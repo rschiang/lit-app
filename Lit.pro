@@ -3,11 +3,9 @@ TARGET = Lit
 QT += qml quick
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp \
-    LitNativeHandler.cpp
+SOURCES += src/*.cpp
 
-HEADERS += \
-    LitNativeHandler.h
+HEADERS += src/*.h
 
 RESOURCES += \
     main.qrc
