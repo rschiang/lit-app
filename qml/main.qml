@@ -13,16 +13,15 @@ QtObject {
         var window = windowPrototype.createObject(app)
         Native.setScreen(window, screen)
         window.open()
+
+        return window
     }
 
     // Events
     Component.onCompleted: {
-        var screens = Native.getScreens()
+        Native.enumerateScreen(spawn)
+
         var primaryScreen = Native.getPrimaryScreen()
-
-        for (var i = 0; i < screens.length; i++)
-            spawn(screens[i])
-
         var editor = editorPrototype.createObject(app)
         Native.setScreen(editor, primaryScreen)
         editor.open()

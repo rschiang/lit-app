@@ -1,10 +1,13 @@
 import QtQuick 2.0
-import QtQuick.Window 2.1
+import QtQuick.Window 2.2
 import QtQuick.Controls 1.1
 
 Window {
     id: window
     title: "Lit"
+
+    width: 400
+    height: 300
 
     onWidthChanged: timer.start()
     onHeightChanged: timer.start()
@@ -13,6 +16,8 @@ Window {
         window.flags |= Qt.WindowStaysOnTopHint
         window.show()
     }
+
+    onClosing: Qt.quit()
 
     property bool lightsOut: false
     color: lightsOut ? "#282828" : "#fff"
