@@ -24,9 +24,12 @@ QtObject {
         var screens = Native.getScreens()
         var primaryScreen = Native.getPrimaryScreen()
 
-        for (var i = 0; i < screens.length; i++)
-            if (screens[i] != primaryScreen)
-                spawn(screens[i])
+        if (screens.length > 1) {
+            for (var i = 0; i < screens.length; i++)
+                if (screens[i] != primaryScreen)
+                    spawn(screens[i]) }
+        else
+            spawn(primaryScreen)
 
         var editor = spawn(primaryScreen, editorPrototype)
         editor.init()
