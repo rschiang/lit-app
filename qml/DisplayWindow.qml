@@ -8,9 +8,9 @@ Window {
 
     Text {
         id: label
-        anchors.fill: parent
+        width: parent.width
         horizontalAlignment: TextEdit.AlignHCenter
-        verticalAlignment: TextEdit.AlignVCenter
+        y: (parent.height - label.height) / 2
 
         lineHeight: 1.15
         wrapMode: Text.NoWrap
