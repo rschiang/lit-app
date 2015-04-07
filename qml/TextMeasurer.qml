@@ -9,7 +9,11 @@ Item {
     property int maxHeight: 0
     property double scaleRatio: 1.272006289 // 1.618 ** 0.5
 
-    signal measured(int pixelSize)
+    property int measuredWidth
+    property int measuredHeight
+    property int measuredSize
+
+    signal measured
 
     Text {
         id: measurer
@@ -32,10 +36,15 @@ Item {
                 do {
                     measurer.font.pixelSize = baseSize
                     baseSize = Math.floor(baseSize / item.scaleRatio)
-                } while (measurer.paintedWidth >= item.maxWidth ||
-                         measurer.paintedHeight >= item.maxHeight)
+                }
+                while (measurer.paintedWidth >= item.maxWidth ||
+                       measurer.paintedHeight >= item.maxHeight)
 
-            item.measured(baseSize)
+            item.measuredWidth = measurer.paintedWidth
+            item.measuredHeight = measurer.paintedHeight
+            item.measuredSize = baseSize
+
+            item.measured()
         }
     }
 
@@ -45,6 +54,7 @@ Item {
             measurer.horizontalAlignment = text.horizontalAlignment
             measurer.wrapMode = text.wrapMode
         }
+
         measurer.font = text.font
         measurer.text = text.text
 
