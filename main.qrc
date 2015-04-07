@@ -3,5 +3,6 @@
         <file>qml/main.qml</file>
         <file>qml/EditorWindow.qml</file>
         <file>qml/DisplayWindow.qml</file>
+        <file>qml/TextMeasurer.qml</file>
     </qresource>
 </RCC>

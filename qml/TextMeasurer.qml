@@ -2,8 +2,8 @@ import QtQuick 2.0
 
 Item {
     id: item
-    opacity: 0
-    visible: false
+    opacity: 0.5
+    //visible: false
 
     property int maxWidth: 0
     property int maxHeight: 0
@@ -18,6 +18,11 @@ Item {
     Text {
         id: measurer
         renderType: Text.NativeRendering
+        font: item.parent.font
+        text: item.parent.text || "Hello world."
+        horizontalAlignment: item.parent.horizontalAlignment
+        wrapMode: item.parent.wrapMode
+        width: item.parent.width || item.maxWidth || undefined
     }
 
     Timer {
@@ -42,22 +47,20 @@ Item {
 
             item.measuredWidth = measurer.paintedWidth
             item.measuredHeight = measurer.paintedHeight
-            item.measuredSize = baseSize
+            item.measuredSize = measurer.font.pixelSize
 
             item.measured()
         }
     }
 
-    function measure(text) {
-        if (item.maxWidth > 0 || item.maxHeight > 0) {
-            measurer.width = text.width
-            measurer.horizontalAlignment = text.horizontalAlignment
-            measurer.wrapMode = text.wrapMode
-        }
+    Connections {
+        target: item.parent
+        onTextChanged: refresh()
+        onWidthChanged: refresh()
+        onWrapModeChanged: refresh()
+    }
 
-        measurer.font = text.font
-        measurer.text = text.text
-
+    function refresh() {
         timer.start()
     }
 }
