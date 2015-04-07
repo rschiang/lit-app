@@ -18,15 +18,13 @@ Window {
     TextEdit {
         id: editor
         anchors.fill: parent
-        horizontalAlignment: TextEdit.AlignHCenter
-        textMargin: 0
-        wrapMode: TextEdit.Wrap
+        wrapMode: Text.Wrap
 
         color: "#222"
         selectionColor: "#4fc3f7"
         selectedTextColor: "#333"
 
-        font.pixelSize: 36
+        font.pixelSize: 24
         font.family: "Noto Sans T Chinese"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering

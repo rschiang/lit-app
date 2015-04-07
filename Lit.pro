@@ -24,6 +24,3 @@ mac {
         QMAKE_POST_LINK += macdeployqt Lit.app -qmldir=qml/ -verbose=1 -dmg;
     }
 }
-
-DISTFILES += \
-    qml/TextMeasurer.qml
