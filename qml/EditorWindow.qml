@@ -34,7 +34,19 @@ Window {
         selectByMouse: true
 
         onTextChanged: {
-            app.text = text
+            app.text = format(text)
+        }
+
+        function format(text) {
+            return text
+                .replace(/[&<"'>]/g, function(c) {
+                    switch (c) {
+                        case "&": return "&amp;"
+                        case "<": return "&lt;"
+                        case '"': return "&quot;"
+                        case "'": return "&#039;"
+                        case ">": return "&gt;"
+                    }})
         }
     }
 }
