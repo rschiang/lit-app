@@ -39,14 +39,13 @@ Window {
 
         function format(text) {
             return text
-                .replace(/[&<"'>]/g, function(c) {
+                .replace(/[<>&]/g, function(c) {
                     switch (c) {
                         case "&": return "&amp;"
                         case "<": return "&lt;"
-                        case '"': return "&quot;"
-                        case "'": return "&#039;"
                         case ">": return "&gt;"
                     }})
+                .replace(/`(.+)`/g, "<code style='font-family: Source Code Mono, monospace'>$1</code>")
         }
     }
 }

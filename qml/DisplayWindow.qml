@@ -14,6 +14,7 @@ Window {
 
         lineHeight: 1.15
         wrapMode: Text.NoWrap
+        textFormat: Text.RichText
 
         color: "#222"
 
@@ -39,6 +40,7 @@ Window {
         horizontalAlignment: label.horizontalAlignment
         lineHeight: label.lineHeight
         wrapMode: label.wrapMode
+        textFormat: Text.StyledText
         font: label.font
         text: label.text
     }
