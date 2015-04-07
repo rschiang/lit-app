@@ -11,7 +11,9 @@ Window {
         anchors.fill: parent
         horizontalAlignment: TextEdit.AlignHCenter
         verticalAlignment: TextEdit.AlignVCenter
-        wrapMode: Text.WordWrap
+
+        lineHeight: 1.15
+        wrapMode: Text.NoWrap
 
         color: "#222"
 
@@ -30,15 +32,14 @@ Window {
 
     Text {
         id: measurer
-        width: label.width
-        horizontalAlignment: TextEdit.AlignHCenter
-        wrapMode: label.wrapMode
-
         opacity: 0
-
-        font: label.font
         renderType: Text.NativeRendering
 
+        width: label.width
+        horizontalAlignment: label.horizontalAlignment
+        lineHeight: label.lineHeight
+        wrapMode: label.wrapMode
+        font: label.font
         text: label.text
     }
 
