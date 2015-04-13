@@ -46,7 +46,7 @@ Window {
                         case ">": return "&gt;"
                         case "\n": return "<br>"
                     }})
-                .replace(/`(.+)`/g, "<code style='font-family: Source Code Pro, monospace'>$1</code>")
+                .replace(/`(.+)`/g, "<code style='font-family: Ubuntu Mono, monospace'>$1</code>")
                 .replace(/\*\*([^\n\*]+)\*\*/g, "<b>$1</b>")
                 .replace(/\*([^\s\n\*]+)\*/g, "*<i>$1</i>*")
                 .replace(/~~(.+)~~/g, "<s>$1</s>")

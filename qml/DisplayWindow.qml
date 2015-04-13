@@ -69,10 +69,12 @@ Window {
     Connections {
         target: app
         onTextChanged: {
-            label.text = app.text
             // Workaround for inproper line height
-            label.textFormat = app.text.indexOf('<code') >= 0 ? Text.RichText
-                                                              : Text.StyledText
+            var format = app.text.indexOf('<') >= 0 ? Text.RichText
+                                                    : Text.StyledText
+            if (label.textFormat !== format)
+                label.textFormat = format
+            label.text = app.text
             timer.start()
         }
     }
