@@ -21,6 +21,6 @@ mac {
     QMAKE_MAC_SDK = macosx10.9
 
     CONFIG(build_release) {
-        QMAKE_POST_LINK += macdeployqt Lit.app -qmldir=qml/ -verbose=1 -dmg;
+        QMAKE_POST_LINK += macdeployqt Lit.app -qmldir=../Lit/qml/ -verbose=1 -dmg;
     }
 }
