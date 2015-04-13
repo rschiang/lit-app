@@ -12,9 +12,9 @@ Window {
         horizontalAlignment: TextEdit.AlignHCenter
         y: (parent.height - label.height) / 2
 
-        lineHeight: 1.15
+        lineHeight: textFormat == Text.RichText ? 0.85 : 1.15
         wrapMode: Text.NoWrap
-        textFormat: Text.RichText
+        textFormat: Text.StyledText
 
         color: "#222"
 
@@ -38,7 +38,7 @@ Window {
 
         width: label.width
         horizontalAlignment: label.horizontalAlignment
-        lineHeight: label.lineHeight
+        lineHeight: 1.25
         wrapMode: label.wrapMode
         textFormat: Text.StyledText
         font: label.font
@@ -62,7 +62,7 @@ Window {
             } while (measurer.paintedWidth >= window.width ||
                      measurer.paintedHeight >= window.height)
 
-            label.font.pixelSize = baseSize;
+            label.font.pixelSize = baseSize
         }
     }
 
@@ -70,6 +70,9 @@ Window {
         target: app
         onTextChanged: {
             label.text = app.text
+            // Workaround for inproper line height
+            label.textFormat = app.text.indexOf('<code') >= 0 ? Text.RichText
+                                                              : Text.StyledText
             timer.start()
         }
     }
