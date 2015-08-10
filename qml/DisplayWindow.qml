@@ -5,6 +5,7 @@ Window {
     id: window
     title: "Lit"
     visible: true
+    color: app.mode == "code" ? "#272822" : "#fff"
 
     Text {
         id: label
@@ -16,7 +17,7 @@ Window {
         wrapMode: Text.NoWrap
         textFormat: Text.StyledText
 
-        color: "#222"
+        color: app.mode == "code" ? "#f8f8f2" : "#222"
 
         font.family: app.mode == "code" ? "Ubuntu Mono, Noto Sans T Chinese" : "Noto Sans T Chinese"
         font.weight: Font.DemiBold
