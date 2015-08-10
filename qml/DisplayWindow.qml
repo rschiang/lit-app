@@ -9,7 +9,7 @@ Window {
     Text {
         id: label
         width: parent.width
-        horizontalAlignment: TextEdit.AlignHCenter
+        horizontalAlignment: app.mode == "code" ? TextEdit.AlignLeft : TextEdit.AlignHCenter
         y: (parent.height - label.height) / 2
 
         lineHeight: textFormat == Text.RichText ? 0.85 : 1.15
@@ -18,7 +18,7 @@ Window {
 
         color: "#222"
 
-        font.family: "Noto Sans T Chinese"
+        font.family: app.mode == "code" ? "Ubuntu Mono, Noto Sans T Chinese" : "Noto Sans T Chinese"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true
@@ -40,7 +40,7 @@ Window {
         horizontalAlignment: label.horizontalAlignment
         lineHeight: 1.25
         wrapMode: label.wrapMode
-        textFormat: Text.StyledText
+        textFormat: app.mode == "code" ? Text.PlainText : Text.StyledText
         font: label.font
         text: label.text
     }
@@ -70,8 +70,9 @@ Window {
         target: app
         onTextChanged: {
             // Workaround for inproper line height
-            var format = app.text.indexOf('<') >= 0 ? Text.RichText
-                                                    : Text.StyledText
+            var format = app.mode == "code" ? Text.PlainText
+                                            : app.text.indexOf('<') >= 0 ? Text.RichText
+                                                                         : Text.StyledText
             if (label.textFormat !== format)
                 label.textFormat = format
             label.text = app.text

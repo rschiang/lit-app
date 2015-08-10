@@ -25,7 +25,7 @@ Window {
         selectedTextColor: "#333"
 
         font.pixelSize: 24
-        font.family: "Noto Sans T Chinese"
+        font.family: app.mode == "code" ? "Ubuntu Mono, Noto Sans T Chinese" : "Noto Sans T Chinese"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true
@@ -34,7 +34,7 @@ Window {
         selectByMouse: true
 
         onTextChanged: {
-            app.text = format(text)
+            app.text = (app.mode == "code") ? text : format(text)
         }
 
         function format(text) {
@@ -50,6 +50,15 @@ Window {
                 .replace(/\*\*([^\n\*]+)\*\*/g, "<b>$1</b>")
                 .replace(/\*([^\s\n\*]+)\*/g, "*<i>$1</i>*")
                 .replace(/~~(.+)~~/g, "<s>$1</s>")
+        }
+
+        Keys.onPressed: {
+            if (event.modifiers & Qt.ControlModifier)
+                switch (event.key) {
+                case Qt.Key_L:
+                    app.mode = (app.mode == "code") ? "" : "code"
+                    break
+                }
         }
     }
 }
