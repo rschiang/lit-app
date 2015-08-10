@@ -25,7 +25,7 @@ Window {
         selectedTextColor: "#333"
 
         font.pixelSize: 24
-        font.family: app.mode == "code" ? "Ubuntu Mono, Noto Sans T Chinese" : "Noto Sans T Chinese"
+        font.family: app.mode == "code" ? "Source Code Pro, Noto Sans T Chinese" : "Noto Sans T Chinese"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true

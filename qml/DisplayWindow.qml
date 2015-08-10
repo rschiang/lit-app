@@ -19,7 +19,7 @@ Window {
 
         color: app.mode == "code" ? "#f8f8f2" : "#222"
 
-        font.family: app.mode == "code" ? "Ubuntu Mono, Noto Sans T Chinese" : "Noto Sans T Chinese"
+        font.family: app.mode == "code" ? "Source Code Pro, Noto Sans T Chinese" : "Noto Sans T Chinese"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true
@@ -42,7 +42,8 @@ Window {
         lineHeight: 1.25
         wrapMode: label.wrapMode
         textFormat: app.mode == "code" ? Text.PlainText : Text.StyledText
-        font: label.font
+        font.family: label.font.family
+        font.weight: label.font.weight
         text: label.text
     }
 
