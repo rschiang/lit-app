@@ -39,6 +39,7 @@ Window {
 
         function format(text) {
             return text
+                .replace(/(.+)\n\n/g, "")
                 .replace(/[<>&\n]/g, function(c) {
                     switch (c) {
                         case "&": return "&amp;"
