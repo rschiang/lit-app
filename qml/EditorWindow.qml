@@ -64,8 +64,8 @@ Window {
                 var delta = pos - flickable.contentY
                 if (delta < 0)
                     flickable.contentY = pos
-                else if (delta > flickable.height)
-                    flickable.contentY += (delta + cursorRectangle.height - flickable.height)
+                else if (delta >= flickable.height)
+                    flickable.contentY = Math.min(flickable.contentHeight, pos + cursorRectangle.height) - flickable.height
             }
 
             Keys.onPressed: {
