@@ -16,6 +16,7 @@ Window {
     onClosing: Qt.quit()
 
     Flickable {
+        id: flickable
         anchors.fill: parent
         contentHeight: editor.height
 
@@ -58,6 +59,15 @@ Window {
                     .replace(/~~(.+)~~/g, "<s>$1</s>")
             }
 
+            function scrollToSelection() {
+                var pos = cursorRectangle.y
+                var delta = pos - flickable.contentY
+                if (delta < 0)
+                    flickable.contentY = pos
+                else if (delta > flickable.height)
+                    flickable.contentY += (delta + cursorRectangle.height - flickable.height)
+            }
+
             Keys.onPressed: {
                 if (event.modifiers & Qt.ControlModifier)
                     switch (event.key) {
@@ -66,6 +76,9 @@ Window {
                         break
                     }
             }
+
+            onSelectionStartChanged: scrollToSelection()
+            onSelectionEndChanged: scrollToSelection()
         }
     }
 }
