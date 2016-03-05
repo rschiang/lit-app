@@ -15,52 +15,57 @@ Window {
 
     onClosing: Qt.quit()
 
-    TextEdit {
-        id: editor
+    Flickable {
         anchors.fill: parent
-        wrapMode: Text.Wrap
+        contentHeight: editor.height
 
-        color: "#222"
-        selectionColor: "#4fc3f7"
-        selectedTextColor: "#333"
+        TextEdit {
+            id: editor
+            width: parent.width
+            wrapMode: Text.Wrap
 
-        font.pixelSize: 24
-        font.family: app.mode == "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
-        font.weight: Font.DemiBold
-        renderType: TextEdit.NativeRendering
-        smooth: true
+            color: "#222"
+            selectionColor: "#4fc3f7"
+            selectedTextColor: "#333"
 
-        focus: true
-        selectByMouse: true
+            font.pixelSize: 24
+            font.family: app.mode == "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
+            font.weight: Font.DemiBold
+            renderType: TextEdit.NativeRendering
+            smooth: true
 
-        onTextChanged: {
-            app.text = (app.mode == "code") ? text : format(text)
-        }
+            focus: true
+            selectByMouse: true
 
-        function format(text) {
-            return text
-                .replace(/\n*$/, '\n')
-                .replace(/[\d\D]+\n\n+(\S)/g, "$1")
-                .replace(/[<>&\n]/g, function(c) {
-                    switch (c) {
-                        case "&": return "&amp;"
-                        case "<": return "&lt;"
-                        case ">": return "&gt;"
-                        case "\n": return "<br>"
-                    }})
-                .replace(/`(.+)`/g, "<code style='font-family: Ubuntu Mono, monospace'>$1</code>")
-                .replace(/\*\*([^\n\*]+)\*\*/g, "<b>$1</b>")
-                .replace(/\*([^\s\n\*]+)\*/g, "*<i>$1</i>*")
-                .replace(/~~(.+)~~/g, "<s>$1</s>")
-        }
+            onTextChanged: {
+                app.text = (app.mode == "code") ? text : format(text)
+            }
 
-        Keys.onPressed: {
-            if (event.modifiers & Qt.ControlModifier)
-                switch (event.key) {
-                case Qt.Key_L:
-                    app.mode = (app.mode == "code") ? "" : "code"
-                    break
-                }
+            function format(text) {
+                return text
+                    .replace(/\n*$/, '\n')
+                    .replace(/[\d\D]+\n\n+(\S)/g, "$1")
+                    .replace(/[<>&\n]/g, function(c) {
+                        switch (c) {
+                            case "&": return "&amp;"
+                            case "<": return "&lt;"
+                            case ">": return "&gt;"
+                            case "\n": return "<br>"
+                        }})
+                    .replace(/`(.+)`/g, "<code style='font-family: Ubuntu Mono, monospace'>$1</code>")
+                    .replace(/\*\*([^\n\*]+)\*\*/g, "<b>$1</b>")
+                    .replace(/\*([^\s\n\*]+)\*/g, "*<i>$1</i>*")
+                    .replace(/~~(.+)~~/g, "<s>$1</s>")
+            }
+
+            Keys.onPressed: {
+                if (event.modifiers & Qt.ControlModifier)
+                    switch (event.key) {
+                    case Qt.Key_L:
+                        app.mode = (app.mode == "code") ? "" : "code"
+                        break
+                    }
+            }
         }
     }
 }
