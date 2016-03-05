@@ -19,7 +19,7 @@ Window {
 
         color: app.mode == "code" ? "#f8f8f2" : "#222"
 
-        font.family: app.mode == "code" ? "Source Code Pro, Noto Sans T Chinese" : "Noto Sans T Chinese"
+        font.family: app.mode == "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true
