@@ -76,16 +76,6 @@ Window {
                         app.mode = (app.mode == "code") ? "" : "code"
                         break
                     }
-                if (event.key === Qt.Key_Return && app.mode == "code") {
-                    var lineStart = text.lastIndexOf('\n', selectionStart - 1) + 1
-
-                    // Insert all spaces at the start of line
-                    for (var i = lineStart; i < selectionStart; i++)
-                        if (text[i] != " ") {
-                            insert(selectionEnd + 1, new Array(i - lineStart + 1).join(" "))
-                            console.log(selectionEnd + ', ' + length)
-                            break
-                        }
                 }
             }
 
