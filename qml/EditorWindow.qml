@@ -76,7 +76,6 @@ Window {
                         app.mode = (app.mode == "code") ? "" : "code"
                         break
                     }
-                }
             }
 
             onSelectionStartChanged: scrollToSelection()
