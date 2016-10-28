@@ -39,7 +39,7 @@ Window {
 
         width: label.width
         horizontalAlignment: label.horizontalAlignment
-        lineHeight: 1.25
+        lineHeight: label.lineHeight
         wrapMode: label.wrapMode
         textFormat: app.mode == "code" ? Text.PlainText : Text.StyledText
         font.family: label.font.family
@@ -64,7 +64,7 @@ Window {
             } while (measurer.paintedWidth >= window.width ||
                      measurer.paintedHeight >= window.height)
 
-            label.font.pixelSize = baseSize
+            label.font.pixelSize = measurer.font.pixelSize
         }
     }
 
