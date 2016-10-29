@@ -20,6 +20,7 @@ mac {
     ICON = platform/mac/icon.icns
 
     CONFIG(build_release) {
-        QMAKE_POST_LINK += macdeployqt Lit.app -qmldir=../Lit/qml/ -verbose=1 -dmg;
+        # qmldir must match project folder name
+        QMAKE_POST_LINK += macdeployqt Lit.app -qmldir=../lit-app/qml/ -verbose=1 -dmg;
     }
 }
