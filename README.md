@@ -14,4 +14,19 @@ Supported syntaxes
 ~~strikethrough~~
 ```
 
-https://github.com/rschiang/lit-app
+Functionalities
+---------------
+
+`Cmd+L` toggles **Code Mode**, which will render text in monospace.
+
+
+Contributing
+------------
+
+Visit [Lit project page on GitHub](https://github.com/rschiang/lit-app).
+
+
+License
+-------
+
+See [LICENSE](LICENSE.md).
