@@ -7,7 +7,7 @@
 	<key>CFBundleIconFile</key>
         <string>icon.icns</string>
 	<key>CFBundleIdentifier</key>
-        <string>com.litapp.lit</string>
+        <string>tw.poren.lit</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>CFBundleName</key>

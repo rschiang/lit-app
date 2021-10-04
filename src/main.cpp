@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     app.setApplicationName("Lit");
-    app.setOrganizationName("litapp");
-    app.setOrganizationDomain("litapp.com");
+    app.setOrganizationName("Poren Chiang");
+    app.setOrganizationDomain("lit.poren.tw");
 
     LitNativeHandler native(&app);
 
