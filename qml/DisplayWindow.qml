@@ -37,17 +37,18 @@ Window {
         }
 
         function format(text) {
-            return text
-                .replace(/\n+$/, '\n')
-                .replace(/[\d\D]+\n\n+(\S)/g, "$1")
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;")
+            let pageBreakIndex = text.lastIndexOf("\n\n")
+            let pageText = pageBreakIndex >= 0 ? text.substr(pageBreakIndex+2) : text
+            return pageText
+                .replace(/\n+$/g, '\n')
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
                 .replace(/`(.+)`/g, "<code style='font-family: Ubuntu Mono, monospace'>$1</code>")
                 .replace(/\*\*([^\n\*]+)\*\*/g, "<b>$1</b>")
                 .replace(/\*([^\s\n\*]+)\*/g, "*<i>$1</i>*")
                 .replace(/~~(.+)~~/g, "<s>$1</s>")
-                .replace("\n", "<br>")
+                .replace(/\n/g, "<br>")
         }
     }
 
