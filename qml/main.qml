@@ -8,40 +8,32 @@ QtObject {
     property string theme
     property string mode
 
-    // Functions
-    function spawn(screen, proto) {
-        if (!proto)
-            proto = windowPrototype
+    // Function
+    function spawnDisplayWindow(screen) {
+        let window = windowPrototype.createObject(app)
+        window.screen = screen
+        Native.fillScreen(window, screen)
 
-        var window = proto.createObject(app)
-        Native.setScreen(window, screen)
-
+        window.show()
+        window.raise()
         return window
     }
 
     // Events
     Component.onCompleted: {
-        const screens = Native.getScreens()
+        const screens = Qt.application.screens
         const primaryScreen = Native.getPrimaryScreen()
 
-        if (screens.length >= 2) {
-            for (let screen of screens) {
-                if (screen !== primaryScreen) {
-                    let window = spawn(screen)
-                    Native.fillScreen(window, screen)
-                    window.show()
-                    window.raise()
-                }
-            }
-        } else {
-            let window = spawn(primaryScreen)
-            Native.fillScreen(window, primaryScreen)
-            window.show()
-            window.raise()
-        }
+        if (screens.length < 2)
+            spawnDisplayWindow(primaryScreen)
+        else
+            for (let screen of screens)
+                if (screen !== primaryScreen)
+                    spawnDisplayWindow(screen)
 
-        let editor = spawn(primaryScreen, editorPrototype)
-        Native.centerInScreen(editor, primaryScreen)
+        let editor = editorPrototype.createObject(app)
+        editor.screen = primaryScreen
+        Native.alignAtScreen(editor, primaryScreen)
         editor.show()
     }
 
