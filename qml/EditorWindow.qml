@@ -1,4 +1,5 @@
 import QtQuick 6.0
+import QtQuick.Controls 6.0
 
 Window {
     id: window
@@ -14,22 +15,15 @@ Window {
 
     onClosing: Qt.quit()
 
-    Flickable {
-        id: flickable
+    ScrollView {
+        id: scrollView
         anchors.fill: parent
-        contentHeight: editor.height
 
-        TextEdit {
+        TextArea {
             id: editor
-            width: parent.width
-            padding: 8
 
             wrapMode: Text.Wrap
             textFormat: TextEdit.PlainText
-
-            color: app.theme === "dark" ? "#fff" : "#222"
-            selectionColor: app.theme === "dark" ? "#3f638b" : "#4fc3f7"
-            selectedTextColor: app.theme === "dark" ? "#fff" : "#333"
 
             font.pixelSize: 24
             font.family: app.mode === "code" ? "Source Code Pro, Source Han Sans TC" : "Source Sans Pro, Source Han Sans TC"
@@ -39,15 +33,6 @@ Window {
 
             focus: true
             selectByMouse: true
-
-            function scrollToSelection() {
-                var pos = cursorRectangle.y
-                var delta = pos - flickable.contentY
-                if (delta < 0)
-                    flickable.contentY = pos
-                else if (delta >= flickable.height)
-                    flickable.contentY = Math.min(flickable.contentHeight, pos + cursorRectangle.height) - flickable.height
-            }
 
             onTextChanged: app.text = text
 
@@ -62,9 +47,28 @@ Window {
                         break
                     }
             }
+        }
+    }
 
-            onSelectionStartChanged: scrollToSelection()
-            onSelectionEndChanged: scrollToSelection()
+    Label {
+        id: hint
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+            margins: 8
+        }
+        visible: (editor.text.length === 0)
+
+        opacity: 0.45
+        renderType: Text.NativeRendering
+        textFormat: TextEdit.PlainText
+
+        text: "Type to project text. Move to next screen with two line breaks.\n" +
+              "⌘-D: Dark Mode  ⌘-L: Plain Text Mode (turn off markdown formatting)"
+
+        onVisibleChanged: {
+            if (editor.text.length > 0)
+                hint.visible = false  // Disconnecting the property, Make hint display only once.
         }
     }
 }
