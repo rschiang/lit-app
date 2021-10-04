@@ -29,7 +29,7 @@ Window {
             selectedTextColor: "#333"
 
             font.pixelSize: 24
-            font.family: app.mode == "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
+            font.family: app.mode === "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
             font.weight: Font.DemiBold
             renderType: TextEdit.NativeRendering
             smooth: true
@@ -38,24 +38,7 @@ Window {
             selectByMouse: true
 
             onTextChanged: {
-                app.text = (app.mode == "code") ? text : format(text)
-            }
-
-            function format(text) {
-                return text
-                    .replace(/\n+$/, '\n')
-                    .replace(/[\d\D]+\n\n+(\S)/g, "$1")
-                    .replace(/[<>&\n]/g, function(c) {
-                        switch (c) {
-                            case "&": return "&amp;"
-                            case "<": return "&lt;"
-                            case ">": return "&gt;"
-                            case "\n": return "<br>"
-                        }})
-                    .replace(/`(.+)`/g, "<code style='font-family: Ubuntu Mono, monospace'>$1</code>")
-                    .replace(/\*\*([^\n\*]+)\*\*/g, "<b>$1</b>")
-                    .replace(/\*([^\s\n\*]+)\*/g, "*<i>$1</i>*")
-                    .replace(/~~(.+)~~/g, "<s>$1</s>")
+                app.text = text
             }
 
             function scrollToSelection() {

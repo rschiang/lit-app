@@ -4,7 +4,7 @@ Window {
     id: window
     title: "Lit"
     visible: true
-    color: app.mode == "code" ? "#272822" : "#fff"
+    color: app.mode === "code" ? "#272822" : "#fff"
 
     Text {
         id: label
@@ -13,19 +13,22 @@ Window {
             left: parent.left
             right: parent.right
             verticalCenter: parent.verticalCenter
+            margins: 8
         }
-        horizontalAlignment: app.mode == "code" ? TextEdit.AlignLeft : TextEdit.AlignHCenter
+        horizontalAlignment: app.mode === "code" ? TextEdit.AlignLeft : TextEdit.AlignHCenter
 
-        lineHeight: textFormat == Text.RichText ? 0.85 : 1.15
+        lineHeight: 0.85
         wrapMode: Text.NoWrap
-        textFormat: Text.StyledText
+        textFormat: app.mode === "code" ? Text.PlainText : Text.RichText
 
-        color: app.mode == "code" ? "#f8f8f2" : "#222"
+        color: app.mode === "code" ? "#f8f8f2" : "#222"
 
-        font.family: app.mode == "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
+        font.family: app.mode === "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true
+
+        text: app.mode === "code" ? app.text : format(app.text)
 
         Behavior on font.pixelSize {
             SmoothedAnimation {
@@ -33,18 +36,33 @@ Window {
                 easing.type: Easing.InExpo
             }
         }
+
+        function format(text) {
+            return text
+                .replace(/\n+$/, '\n')
+                .replace(/[\d\D]+\n\n+(\S)/g, "$1")
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace(/`(.+)`/g, "<code style='font-family: Ubuntu Mono, monospace'>$1</code>")
+                .replace(/\*\*([^\n\*]+)\*\*/g, "<b>$1</b>")
+                .replace(/\*([^\s\n\*]+)\*/g, "*<i>$1</i>*")
+                .replace(/~~(.+)~~/g, "<s>$1</s>")
+                .replace("\n", "<br>")
+        }
     }
 
     Text {
         id: measurer
         opacity: 0
         renderType: Text.NativeRendering
+        antialiasing: false
 
         width: label.width
         horizontalAlignment: label.horizontalAlignment
         lineHeight: label.lineHeight
         wrapMode: label.wrapMode
-        textFormat: app.mode == "code" ? Text.PlainText : Text.StyledText
+        textFormat: label.textFormat
         font.family: label.font.family
         font.weight: label.font.weight
         text: label.text
@@ -67,21 +85,15 @@ Window {
             } while (measurer.paintedWidth >= window.width ||
                      measurer.paintedHeight >= window.height)
 
-            label.font.pixelSize = measurer.font.pixelSize
+            let size = measurer.font.pixelSize
+            label.font.pixelSize = size
+            label.font.letterSpacing = size * -0.025
         }
     }
 
     Connections {
         target: app
-
         function onTextChanged() {
-            // Workaround for inproper line height
-            var format = app.mode == "code" ? Text.PlainText
-                                            : app.text.indexOf('<') >= 0 ? Text.RichText
-                                                                         : Text.StyledText
-            if (label.textFormat !== format)
-                label.textFormat = format
-            label.text = app.text
             timer.start()
         }
     }
