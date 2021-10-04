@@ -1,6 +1,4 @@
-import QtQuick 2.5
-import QtQuick.Window 2.2
-import QtQuick.Controls 1.1
+import QtQuick 2.2
 
 Window {
     id: window
@@ -69,7 +67,7 @@ Window {
                     flickable.contentY = Math.min(flickable.contentHeight, pos + cursorRectangle.height) - flickable.height
             }
 
-            Keys.onPressed: {
+            Keys.onPressed: (event) => {
                 if (event.modifiers & Qt.ControlModifier)
                     switch (event.key) {
                     case Qt.Key_L:

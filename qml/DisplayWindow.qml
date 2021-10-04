@@ -1,5 +1,4 @@
-import QtQuick 2.0
-import QtQuick.Window 2.1
+import QtQuick 2.2
 
 Window {
     id: window
@@ -9,9 +8,13 @@ Window {
 
     Text {
         id: label
-        width: parent.width
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+        }
         horizontalAlignment: app.mode == "code" ? TextEdit.AlignLeft : TextEdit.AlignHCenter
-        y: (parent.height - label.height) / 2
 
         lineHeight: textFormat == Text.RichText ? 0.85 : 1.15
         wrapMode: Text.NoWrap
@@ -70,7 +73,8 @@ Window {
 
     Connections {
         target: app
-        onTextChanged: {
+
+        function onTextChanged() {
             // Workaround for inproper line height
             var format = app.mode == "code" ? Text.PlainText
                                             : app.text.indexOf('<') >= 0 ? Text.RichText
