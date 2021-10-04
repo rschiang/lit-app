@@ -21,5 +21,15 @@ QScreen* LitNativeHandler::getPrimaryScreen() {
 
 void LitNativeHandler::setScreen(QWindow *window, QScreen *screen) {
     window->setScreen(screen);
-    window->setGeometry(screen->availableGeometry());
+}
+
+void LitNativeHandler::fillScreen(QWindow *window, QScreen *screen) {
+    window->setGeometry(screen->availableVirtualGeometry());
+}
+
+void LitNativeHandler::centerInScreen(QWindow *window, QScreen *screen) {
+    const QPoint screenCenter = screen->availableVirtualGeometry().center();
+    const QSize windowSize = window->size();
+    window->setPosition(screenCenter.x() - windowSize.width() / 2,
+                        screenCenter.y() - windowSize.height() / 2);
 }

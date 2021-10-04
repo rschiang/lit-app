@@ -4,11 +4,11 @@ Window {
     id: window
     title: "Lit"
 
-    function init() {
+    width: 540
+    height: 320
+
+    Component.onCompleted: {
         window.flags |= Qt.WindowStaysOnTopHint
-        window.width = 400
-        window.height = 300
-        window.show()
     }
 
     onClosing: Qt.quit()

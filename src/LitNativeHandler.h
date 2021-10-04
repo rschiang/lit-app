@@ -15,6 +15,8 @@ public:
     Q_INVOKABLE QVariantList getScreens();
     Q_INVOKABLE QScreen* getPrimaryScreen();
     Q_INVOKABLE void setScreen(QWindow* window, QScreen* screen);
+    Q_INVOKABLE void fillScreen(QWindow* window, QScreen* screen);
+    Q_INVOKABLE void centerInScreen(QWindow* window, QScreen* screen);
 
 private:
     QGuiApplication* app;

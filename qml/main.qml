@@ -7,6 +7,7 @@ QtObject {
     property string text
     property string theme
     property string mode
+    property list<Window> windows
 
     // Functions
     function spawn(screen, proto) {
@@ -16,23 +17,32 @@ QtObject {
         var window = proto.createObject(app)
         Native.setScreen(window, screen)
 
+        windows.push(window)
         return window
     }
 
     // Events
     Component.onCompleted: {
-        var screens = Native.getScreens()
-        var primaryScreen = Native.getPrimaryScreen()
+        const screens = Native.getScreens()
+        const primaryScreen = Native.getPrimaryScreen()
 
-        if (screens.length < 2)
-            spawn(primaryScreen)
-        else
-            for (var i in screens)
-                if (screens[i] !== primaryScreen)
-                    spawn(screens[i])
+        if (screens.length >= 2) {
+            for (let screen of screens) {
+                if (screen !== primaryScreen) {
+                    let window = spawn(screen)
+                    Native.fillScreen(window, screen)
+                    window.show()
+                }
+            }
+        } else {
+            let window = spawn(primaryScreen)
+            Native.fillScreen(window, primaryScreen)
+            window.showFullScreen()
+        }
 
-        var editor = spawn(primaryScreen, editorPrototype)
-        editor.init()
+        let editor = spawn(primaryScreen, editorPrototype)
+        Native.centerInScreen(editor, primaryScreen)
+        editor.show()
     }
 
     // Resources
