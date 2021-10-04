@@ -3,7 +3,7 @@ import QtQuick 6.0
 Window {
     id: window
     title: "Lit"
-    color: app.mode === "code" ? "#272822" : "#fff"
+    color: app.theme === "dark" ? "#1e1e1e" : "#fff"
 
     Text {
         id: label
@@ -20,9 +20,9 @@ Window {
         wrapMode: Text.NoWrap
         textFormat: app.mode === "code" ? Text.PlainText : Text.RichText
 
-        color: app.mode === "code" ? "#f8f8f2" : "#222"
+        color: app.theme === "dark" ? "#f8f8f2" : "#222"
 
-        font.family: app.mode === "code" ? "Source Code Pro, Source Han Sans TC" : "Source Han Sans TC"
+        font.family: app.mode === "code" ? "Source Code Pro, Source Han Sans TC" : "Source Sans Pro, Source Han Sans TC"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true
