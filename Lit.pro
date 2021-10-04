@@ -16,6 +16,9 @@ RESOURCES += \
 OTHER_FILES += qml/*.qml
 
 mac {
+    SOURCES += \
+    src/LitNativeHandler_mac.mm
+
     QMAKE_INFO_PLIST = platform/mac/Info.plist
     ICON = platform/mac/icon.icns
 

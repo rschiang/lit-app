@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 6.0
 
 Window {
     id: window
@@ -92,13 +92,16 @@ Window {
 
     Connections {
         target: app
-        function onTextChanged() {
-            timer.start()
-        }
+
+        function onTextChanged() { timer.start() }
+        function onModeChanged() { timer.start() }
     }
 
     onWidthChanged: timer.start()
     onHeightChanged: timer.start()
+    onScreenChanged: Native.fillScreen(window, screen)
+    onWindowStateChanged: Native.makeWindowTitleBarTransparent(window)
+    onVisibilityChanged: Native.makeWindowTitleBarTransparent(window)
     Component.onCompleted: {
         window.flags |= Qt.WindowDoesNotAcceptFocus
     }

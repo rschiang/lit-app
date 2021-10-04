@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 6.0
 
 Window {
     id: window
@@ -21,6 +21,8 @@ Window {
         TextEdit {
             id: editor
             width: parent.width
+            padding: 8
+
             wrapMode: Text.Wrap
             textFormat: TextEdit.PlainText
 

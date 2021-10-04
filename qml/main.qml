@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 6.0
 
 QtObject {
     id: app
@@ -7,7 +7,6 @@ QtObject {
     property string text
     property string theme
     property string mode
-    property list<Window> windows
 
     // Functions
     function spawn(screen, proto) {
@@ -17,7 +16,6 @@ QtObject {
         var window = proto.createObject(app)
         Native.setScreen(window, screen)
 
-        windows.push(window)
         return window
     }
 
@@ -32,12 +30,14 @@ QtObject {
                     let window = spawn(screen)
                     Native.fillScreen(window, screen)
                     window.show()
+                    window.raise()
                 }
             }
         } else {
             let window = spawn(primaryScreen)
             Native.fillScreen(window, primaryScreen)
-            window.showFullScreen()
+            window.show()
+            window.raise()
         }
 
         let editor = spawn(primaryScreen, editorPrototype)

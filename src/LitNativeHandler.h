@@ -17,6 +17,7 @@ public:
     Q_INVOKABLE void setScreen(QWindow* window, QScreen* screen);
     Q_INVOKABLE void fillScreen(QWindow* window, QScreen* screen);
     Q_INVOKABLE void centerInScreen(QWindow* window, QScreen* screen);
+    Q_INVOKABLE void makeWindowTitleBarTransparent(QWindow* window);
 
 private:
     QGuiApplication* app;
