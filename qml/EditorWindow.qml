@@ -43,7 +43,7 @@ Window {
 
             function format(text) {
                 return text
-                    .replace(/\n*$/, '\n')
+                    .replace(/\n+$/, '\n')
                     .replace(/[\d\D]+\n\n+(\S)/g, "$1")
                     .replace(/[<>&\n]/g, function(c) {
                         switch (c) {
