@@ -21,11 +21,11 @@ QtObject {
 
     // Events
     Component.onCompleted: {
-        const screens = Qt.application.screens
+        const screens = Native.getScreens()
         const primaryScreen = Native.getPrimaryScreen()
 
         if (screens.length < 2)
-            spawnDisplayWindow(primaryScreen)
+            spawnDisplayWindow(screens[0])
         else
             for (let screen of screens)
                 if (screen !== primaryScreen)

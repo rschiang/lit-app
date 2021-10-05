@@ -22,7 +22,9 @@ Window {
 
         color: app.theme === "dark" ? "#f8f8f2" : "#222"
 
-        font.family: app.mode === "code" ? "Source Code Pro, Source Han Sans TC" : "Source Sans Pro, Source Han Sans TC"
+
+        font.family: app.mode === "code" ? "Source Code Pro, Menlo, Source Han Sans TC" :
+                                           "Source Sans Pro, Proxima Nova, Source Han Sans TC"
         font.weight: Font.DemiBold
         renderType: TextEdit.NativeRendering
         smooth: true
@@ -82,8 +84,8 @@ Window {
             do {
                 measurer.font.pixelSize = baseSize
                 baseSize = Math.floor(baseSize / ratio)
-            } while (measurer.paintedWidth >= window.width ||
-                     measurer.paintedHeight >= window.height)
+            } while ((measurer.paintedWidth >= window.width ||
+                      measurer.paintedHeight >= window.height) && baseSize >= 12)
 
             let size = measurer.font.pixelSize
             label.font.pixelSize = size
@@ -100,7 +102,7 @@ Window {
 
     onWidthChanged: timer.start()
     onHeightChanged: timer.start()
-    onScreenChanged: Native.fillScreen(window, screen)
+    onScreenChanged: Native.fillScreen(window, window.screen)
     onWindowStateChanged: Native.makeWindowTitleBarTransparent(window)
     onVisibilityChanged: Native.makeWindowTitleBarTransparent(window)
     Component.onCompleted: {

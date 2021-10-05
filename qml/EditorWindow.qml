@@ -26,7 +26,8 @@ Window {
             textFormat: TextEdit.PlainText
 
             font.pixelSize: 24
-            font.family: app.mode === "code" ? "Source Code Pro, Source Han Sans TC" : "Source Sans Pro, Source Han Sans TC"
+            font.family: app.mode === "code" ? "Source Code Pro, Menlo, Source Han Sans TC" :
+                                               "Source Sans Pro, Proxima Nova, Source Han Sans TC"
             font.weight: Font.Medium
             renderType: TextEdit.NativeRendering
             smooth: true
@@ -59,7 +60,7 @@ Window {
         }
         visible: (editor.text.length === 0)
 
-        opacity: 0.45
+        opacity: 0.35
         renderType: Text.NativeRendering
         textFormat: TextEdit.PlainText
 

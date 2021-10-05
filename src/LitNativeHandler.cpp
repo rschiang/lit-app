@@ -6,6 +6,15 @@ LitNativeHandler::LitNativeHandler(QGuiApplication* parent)
     this->app = parent;
 }
 
+QVariantList LitNativeHandler::getScreens() {
+    QVariantList screens;
+    foreach (QScreen* screen, QGuiApplication::screens()) {
+        screens << QVariant::fromValue(screen);
+        QQmlEngine::setObjectOwnership(screen, QQmlEngine::CppOwnership);
+    }
+    return screens;
+}
+
 QScreen* LitNativeHandler::getPrimaryScreen() {
     return QGuiApplication::primaryScreen();
 }
